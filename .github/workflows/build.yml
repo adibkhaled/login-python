@@ -1,4 +1,4 @@
-name: CI + Docker Build & Push
+name: Docker Build & Push
 
 on:
   workflow_run:
