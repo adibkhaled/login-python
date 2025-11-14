@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Licence Lookup</title>
+    <style>
+      label { display:block; margin-top:8px; }
+      input[type="text"] { width: 300px; padding:6px; }
+      textarea { width: 100%; height: 240px; margin-top:8px; }
+      .error { color: red; }
+    </style>
+  </head>
+  <body>
+    <h1>Licence Plate Lookup</h1>
+
+    <form method="post">
+      <label for="licensePlate">Enter licence plate:</label>
+      <input id="licensePlate" name="licensePlate" type="text" value="{{ license_plate }}" required>
+      <button type="submit">Lookup</button>
+    </form>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if result %}
+      <h2>Result (first match)</h2>
+      <p>Key fields:</p>
+      <ul>
+        {% for k,v in result.record.items() %}
+          <li><strong>{{ k }}</strong>: {{ v }}</li>
+        {% endfor %}
+      </ul>
+
+      <p>Raw JSON:</p>
+      <textarea readonly>{{ result.pretty }}</textarea>
+    {% endif %}
+
+    <p><a href="/home">Back to Home</a></p>
+  </body>
+</html>
